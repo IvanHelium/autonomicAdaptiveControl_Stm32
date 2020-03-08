@@ -2,7 +2,8 @@
  * commandHandler.h
  *
  *  Created on: Feb 10, 2020
- *      Author: Lincoln
+ *      Author: Ivan Mishustin
+ *      mishustinivan777@gmail.com
  */
 
 #ifndef COMMANDHANDLER_H_

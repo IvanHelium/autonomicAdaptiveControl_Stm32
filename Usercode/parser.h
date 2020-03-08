@@ -2,7 +2,8 @@
  * parser.h
  *
  *  Created on: Feb 10, 2020
- *      Author: Lincoln
+ *      Author: Ivan Mishustin
+ *      mishustinivan777@gmail.com
  */
 
 #ifndef PARSER_H_
@@ -22,6 +23,7 @@ typedef struct ReceivedFrame
 
 
 void acceptAndParseInputByte(uint8_t inputByte);
+uint8_t calculateCrc(uint8_t* buffer, uint8_t bufferSize);
 uint8_t checkCrc(uint8_t* buffer, uint8_t bufferSize, uint8_t receivedCrc);
 uint8_t getIsHandleCommandNecessaryFlag();
 void clearIsHandleCommandNecessaryFlag();

@@ -2,7 +2,8 @@
  * parser.c
  *
  *  Created on: Feb 10, 2020
- *      Author: Lincoln
+ *      Author: Ivan Mishustin
+ *      mishustinivan777@gmail.com
  */
 
 
@@ -84,16 +85,23 @@ void acceptAndParseInputByte(uint8_t inputByte)
 
 	}
 }
+uint8_t calculateCrc(uint8_t* buffer, uint8_t bufferSize)
+{
+	int i;
+	uint8_t calculatedcrc = 0x00;
+	for(i = 0; i < bufferSize - 1; i++)
+	{
+		calculatedcrc += buffer[i];
+	}
+	return calculatedcrc;
+}
 
 uint8_t checkCrc(uint8_t* buffer, uint8_t bufferSize, uint8_t receivedCrc)
 {
-	uint16_t i;
-	uint8_t calculatedCrc = 0x00;
-	for(i = 0; i < bufferSize - 1; i++)
-	{
-		calculatedCrc += buffer[i];
-	}
-	if(calculatedCrc == receivedCrc){
+	uint8_t calculated_Crc = 0x00;
+
+	calculated_Crc = calculateCrc(buffer, bufferSize);
+	if(calculated_Crc == receivedCrc){
 		return 1;
 	}
 	return 0;

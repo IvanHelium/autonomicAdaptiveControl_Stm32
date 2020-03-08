@@ -16,7 +16,6 @@ extern UART_HandleTypeDef huart6;
 
 static uint8_t _dmaReceiveBuffer[RX_SINGLE_TRANSFER_SIZE];
 
-uint8_t test_data;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if(huart == &huart6) {
