@@ -22,6 +22,7 @@
 #include "main.h"
 #include "dma.h"
 #include "eth.h"
+#include "rng.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb_otg.h"
@@ -31,6 +32,7 @@
 /* USER CODE BEGIN Includes */
 #include "leds.h"
 #include "receiver.h"
+#include "commandHandler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,10 +100,13 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   MX_USART6_UART_Init();
   MX_TIM4_Init();
+  MX_RNG_Init();
   /* USER CODE BEGIN 2 */
   blinkBlueLedOneTime();
 
   receiverInitialize();
+  initializeDatabase();
+  loadDatabase();
 
   /* USER CODE END 2 */
  
@@ -112,6 +117,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
 	 handleCommand();
   }

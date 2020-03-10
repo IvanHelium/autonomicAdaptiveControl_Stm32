@@ -8,9 +8,12 @@
 
 
 #include "commandHandler.h"
+
 #include "parser.h"
 #include "leds.h"
 #include "logger.h"
+#include "transmitter.h"
+#include "autonomic_adaptive_control.h"
 
 #define SENSOR_DATA_TYPE  			0x1A
 #define SAVE_KNOWLEDGEBASE_TYPE		0x2B
@@ -37,6 +40,7 @@ void handleCommand(void)
 			case SAVE_KNOWLEDGEBASE_TYPE:
 				eraseDataFromSectors();
 				saveDatabase();
+				LED_R_ON();
 				break;
 			case LOAD_KNOWLEDGEBASE_TYPE:
 				loadDatabase();

@@ -15,8 +15,10 @@
 
 #define LED_R_ON()			HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET)
 #define LED_R_OFF()			HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET)
+#define LED_R_TOGGLE()		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin)
 #define LED_G_ON()			HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET)
 #define LED_G_OFF()			HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET)
+#define LED_G_TOGGLE()		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin)
 
 void blinkBlueLedOneTime(void);
 
