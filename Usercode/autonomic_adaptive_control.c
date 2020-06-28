@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <math.h>
 #include "rng.h"
+
+#include "leds.h"
 
 
 extern RNG_HandleTypeDef hrng;
@@ -10,8 +13,6 @@ extern RNG_HandleTypeDef hrng;
 static uint8_t prevAction = 0;
 static uint16_t prevPattern = 0;
 
-static float EMPTY_FLOAT = 0.0f;
-static uint16_t EMPTY_UINT16T = 0x0000;
 
 Database database;
 
@@ -22,11 +23,11 @@ void initializeDatabase()
 	int i;
 	int j;
 	for(i = 0; i < NUMBER_OF_PATTERNS; i++){
-		database.databasePatternFullness[i] = EMPTY_FLOAT;
+		database.databasePatternFullness[i] = EMPTY_FULLNESS_VALUE;
 	}
 	for(i = 0; i < NUMBER_OF_PATTERNS; i++){
 		for(j = 0; j < NUMBER_OF_ACTIONS; j++){
-			database.databaseSells[i][j] = EMPTY_UINT16T;
+			database.databaseSells[i][j] = EMPTY_SELL_VALUE;
 		}
 	}
 }
@@ -123,9 +124,16 @@ static uint8_t decisionMaking(Database *databasePtr, uint16_t currentPattern)
     uint8_t action = 0;
     float currentPatternFullness = 0.0f;
     currentPatternFullness = databasePtr->databasePatternFullness[currentPattern];
+
+    if(isnan(currentPatternFullness) || isinf(currentPatternFullness) )
+    {
+    	LED_R_ON();
+    }
+
     if( currentPatternFullness <= PERSENTAGE_OF_RANDOM_ACTION_THROSHOLD ) {
         //choose random action (first empty action)
         action = chooseActionWithUnknownResultAndLogToDatabaseFullness(databasePtr, currentPattern);
+
     }
     else if(currentPatternFullness <= PERSENTAGE_OF_50P_RANDOM_ACTION_THROSHOLD){
          //choose random action (first empty action) with 50% probability ( you will choose best action or random)

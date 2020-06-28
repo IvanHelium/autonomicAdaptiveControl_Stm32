@@ -18,6 +18,7 @@
 #define SENSOR_DATA_TYPE  			0x1A
 #define SAVE_KNOWLEDGEBASE_TYPE		0x2B
 #define	LOAD_KNOWLEDGEBASE_TYPE		0x2C
+#define RESET_KNOWLADGEBASE_TYPE    0x2D
 
 extern ReceivedFrame receivedFrame;
 
@@ -40,10 +41,15 @@ void handleCommand(void)
 			case SAVE_KNOWLEDGEBASE_TYPE:
 				eraseDataFromSectors();
 				saveDatabase();
-				LED_R_ON();
+				LED_G_TOGGLE();
 				break;
 			case LOAD_KNOWLEDGEBASE_TYPE:
 				loadDatabase();
+				break;
+			case RESET_KNOWLADGEBASE_TYPE:
+				eraseDataFromSectors();
+				initializeDatabase();
+				saveDatabase();
 				break;
 		}
 

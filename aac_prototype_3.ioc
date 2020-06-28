@@ -1,4 +1,6 @@
 #MicroXplorer Configuration settings - do not modify
+CORTEX_M7.IPParameters=MPU_Control
+CORTEX_M7.MPU_Control=__NULL
 Dma.Request0=USART6_RX
 Dma.Request1=USART6_TX
 Dma.RequestsNb=2

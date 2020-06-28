@@ -14,10 +14,6 @@
 
 #define USER_DATA_ADDRESS 	 ((uint32_t)0x08018000)
 
-
-
-
-
 int eraseSectors(int sizeInBytes);
 void writeFlash(void* data, int size);
 
